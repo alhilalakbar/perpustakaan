@@ -1,69 +1,351 @@
-# CodeIgniter 4 Application Starter
+# Sistem Informasi Perpustakaan
 
-## What is CodeIgniter?
+Aplikasi Sistem Informasi Perpustakaan berbasis **CodeIgniter 4** untuk pengelolaan data perpustakaan.
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+## Teknologi yang Digunakan
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+- PHP 8.2+
+- CodeIgniter 4
+- MySQL / MariaDB
+- Apache
+- Bootstrap
+- JavaScript
+- Composer
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+---
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+# Instalasi
 
-## Installation & updates
+Clone repository:
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
+```bash
+git clone git@github.com:alhilalakbar/perpustakaan.git
+cd perpustakaan
+```
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+Install dependency:
 
-## Setup
+```bash
+composer install
+```
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+Buat file environment:
 
-## Important Change with index.php
+```bash
+cp env .env
+```
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+Edit `.env`:
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+```env
+CI_ENVIRONMENT = development
+app.indexPage = ''
 
-**Please** read the user guide for a better explanation of how CI4 works!
+database.default.hostname = localhost
+database.default.database = perpus_db
+database.default.username = root
+database.default.password =
+database.default.DBDriver = MySQLi
+database.default.port = 3306
+```
 
-## Repository Management
+---
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+# Setup Database
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+Project ini menggunakan file SQL manual.
 
-## Server Requirements
+Buat database:
 
-PHP version 8.2 or higher is required, with the following extensions installed:
+```sql
+CREATE DATABASE perpus_db;
+```
 
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
+Import database:
 
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - The end of life date for PHP 8.1 was December 31, 2025.
-> - If you are still using below PHP 8.2, you should upgrade immediately.
-> - The end of life date for PHP 8.2 will be December 31, 2026.
+Linux:
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+```bash
+mysql -u root -p perpus_db < perpus_db.sql
+```
 
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+Windows (XAMPP):
+
+Import melalui **phpMyAdmin**:
+
+1. Buka:
+```text
+http://localhost/phpmyadmin
+```
+
+2. Buat database:
+```text
+perpus_db
+```
+
+3. Klik tab **Import**
+4. Pilih file:
+
+```text
+perpus_db.sql
+```
+
+5. Klik **Go**
+
+---
+
+# Menjalankan Project
+
+## Opsi 1 — Windows (XAMPP)
+
+Copy project ke:
+
+```text
+C:\xampp\htdocs\perpustakaan
+```
+
+Start:
+
+- Apache
+- MySQL
+
+Edit `.env`:
+
+```env
+app.baseURL = 'http://localhost/perpustakaan/public/'
+```
+
+Akses:
+
+```text
+http://localhost/perpustakaan/public
+```
+
+### Optional: Virtual Host (URL lebih bersih)
+
+Apache `httpd-vhosts.conf`:
+
+```apache
+<VirtualHost *:80>
+    ServerName perpustakaan.test
+    DocumentRoot "C:/xampp/htdocs/perpustakaan/public"
+
+    <Directory "C:/xampp/htdocs/perpustakaan/public">
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
+```
+
+Edit hosts:
+
+```text
+C:\Windows\System32\drivers\etc\hosts
+```
+
+Tambahkan:
+
+```text
+127.0.0.1 perpustakaan.test
+```
+
+Edit `.env`:
+
+```env
+app.baseURL = 'http://perpustakaan.test/'
+```
+
+Restart Apache.
+
+Akses:
+
+```text
+http://perpustakaan.test
+```
+
+---
+
+## Opsi 2 — Linux Native (Apache + systemctl)
+
+Install dependency:
+
+```bash
+sudo apt update
+sudo apt install apache2 mysql-server php php-mysql php-intl php-mbstring composer libapache2-mod-php unzip
+```
+
+Aktifkan rewrite:
+
+```bash
+sudo a2enmod rewrite
+sudo systemctl restart apache2
+```
+
+Clone project:
+
+```bash
+cd /var/www
+sudo git clone git@github.com:alhilalakbar/perpustakaan.git
+```
+
+Set permission:
+
+```bash
+sudo chown -R $USER:$USER /var/www/perpustakaan
+cd /var/www/perpustakaan
+chmod -R 775 writable
+```
+
+Install dependency:
+
+```bash
+composer install
+```
+
+Buat `.env`:
+
+```bash
+cp env .env
+```
+
+Edit `.env`:
+
+```env
+app.baseURL = 'http://perpustakaan.test/'
+```
+
+Setup database:
+
+```bash
+mysql -u root -p
+```
+
+```sql
+CREATE DATABASE perpus_db;
+EXIT;
+```
+
+Import:
+
+```bash
+mysql -u root -p perpus_db < perpus_db.sql
+```
+
+Buat virtual host:
+
+```bash
+sudo nano /etc/apache2/sites-available/perpustakaan.conf
+```
+
+Isi:
+
+```apache
+<VirtualHost *:80>
+    ServerName perpustakaan.test
+    DocumentRoot /var/www/perpustakaan/public
+
+    <Directory /var/www/perpustakaan/public>
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
+```
+
+Enable site:
+
+```bash
+sudo a2ensite perpustakaan.conf
+sudo systemctl restart apache2
+```
+
+Edit hosts:
+
+```bash
+sudo nano /etc/hosts
+```
+
+Tambahkan:
+
+```text
+127.0.0.1 perpustakaan.test
+```
+
+Akses:
+
+```text
+http://perpustakaan.test
+```
+
+---
+
+## Opsi 3 — Development Server
+
+Untuk testing cepat:
+
+```bash
+php spark serve
+```
+
+Akses:
+
+```text
+http://localhost:8080
+```
+
+---
+
+# Struktur Project
+
+```text
+app/
+public/
+vendor/
+writable/
+perpus_db.sql
+```
+
+---
+
+# Troubleshooting
+
+## Error vendor not found
+
+```bash
+composer install
+```
+
+---
+
+## Error database connection
+
+Pastikan `.env`:
+
+```env
+database.default.database = perpus_db
+database.default.username = root
+database.default.password =
+```
+
+---
+
+## URL masih ada index.php
+
+Pastikan:
+
+```env
+app.indexPage = ''
+```
+
+dan Apache rewrite aktif.
+
+---
+
+# Catatan
+
+Project ini menggunakan import database manual melalui file:
+
+```text
+perpus_db.sql
+```
+
+bukan migration otomatis.
