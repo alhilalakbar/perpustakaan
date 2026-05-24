@@ -32,7 +32,7 @@ composer install
 Buat file environment:
 
 ```bash
-cp .env.exampe .env
+cp env .env
 ```
 
 Edit `.env`:
