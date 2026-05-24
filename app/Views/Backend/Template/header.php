@@ -1,3 +1,4 @@
+<?= session()->get('ses_user') ?? 'User'; ?>
 <!DOCTYPE html>
 <html>
 
@@ -72,16 +73,23 @@
                 <a class="navbar-brand" href="#"><span>Perpustakaan</span> Rorotan</a>
                 <ul class="user-menu">
                     <li class="dropdown pull-right">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
-                                class="glyphicon glyphicon-user"></span> User <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <span class="glyphicon glyphicon-user"></span>
+                            <?php echo $_SESSION['ses_user']; ?>
+                            <span class="caret"></span>
+                        </a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                            <li>
+                                <a href="<?= base_url('admin/logout'); ?>">
+                                    <span class="glyphicon glyphicon-log-out"></span> Logout
+                                </a>
+                            </li>
                         </ul>
                     </li>
                 </ul>
             </div>
 
-        </div><!-- /.container-fluid -->
+        </div>
     </nav>
