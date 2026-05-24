@@ -1,6 +1,6 @@
 # Sistem Informasi Perpustakaan
 
-Aplikasi Sistem Informasi Perpustakaan berbasis **CodeIgniter 4** untuk pengelolaan data perpustakaan.
+Sistem Informasi Perpustakaan berbasis **CodeIgniter 4** untuk pengelolaan data buku, anggota, transaksi peminjaman, pengembalian, dan administrasi perpustakaan.
 
 ## Teknologi yang Digunakan
 
@@ -14,12 +14,12 @@ Aplikasi Sistem Informasi Perpustakaan berbasis **CodeIgniter 4** untuk pengelol
 
 ---
 
-# Instalasi
+## Instalasi
 
 Clone repository:
 
 ```bash
-git clone git@github.com:alhilalakbar/perpustakaan.git
+git clone https://github.com/alhilalakbar/perpustakaan.git
 cd perpustakaan
 ```
 
@@ -35,11 +35,12 @@ Buat file environment:
 cp env .env
 ```
 
-Edit `.env`:
+Edit file `.env`:
 
 ```env
 CI_ENVIRONMENT = development
 app.indexPage = ''
+app.baseURL = ''
 
 database.default.hostname = localhost
 database.default.database = perpus_db
@@ -49,11 +50,11 @@ database.default.DBDriver = MySQLi
 database.default.port = 3306
 ```
 
+Sesuaikan `app.baseURL` jika environment Anda memerlukannya.
+
 ---
 
-# Setup Database
-
-Project ini menggunakan file SQL manual.
+## Setup Database
 
 Buat database:
 
@@ -63,22 +64,24 @@ CREATE DATABASE perpus_db;
 
 Import database:
 
-Linux:
+### Linux / macOS
 
 ```bash
 mysql -u root -p perpus_db < perpus_db.sql
 ```
 
-Windows (XAMPP):
+### Windows (XAMPP / Laragon)
 
-Import melalui **phpMyAdmin**:
+Gunakan **phpMyAdmin**:
 
 1. Buka:
+
 ```text
 http://localhost/phpmyadmin
 ```
 
 2. Buat database:
+
 ```text
 perpus_db
 ```
@@ -94,9 +97,27 @@ perpus_db.sql
 
 ---
 
-# Menjalankan Project
+## Menjalankan Project
 
-## Opsi 1 — Windows (XAMPP)
+### Opsi 1 — Development Server (Paling Cepat)
+
+Pastikan `.env` sudah dikonfigurasi.
+
+Jalankan:
+
+```bash
+php spark serve
+```
+
+Akses:
+
+```text
+http://localhost:8080
+```
+
+---
+
+### Opsi 2 — Windows (XAMPP)
 
 Copy project ke:
 
@@ -104,12 +125,12 @@ Copy project ke:
 C:\xampp\htdocs\perpustakaan
 ```
 
-Start:
+Start service:
 
 - Apache
 - MySQL
 
-Edit `.env`:
+Jika diperlukan, edit `.env`:
 
 ```env
 app.baseURL = 'http://localhost/perpustakaan/public/'
@@ -121,9 +142,15 @@ Akses:
 http://localhost/perpustakaan/public
 ```
 
-### Optional: Virtual Host (URL lebih bersih)
+#### Optional: Virtual Host (URL Lebih Bersih)
 
-Apache `httpd-vhosts.conf`:
+Edit file Apache:
+
+```text
+C:\xampp\apache\conf\extra\httpd-vhosts.conf
+```
+
+Tambahkan:
 
 ```apache
 <VirtualHost *:80>
@@ -165,7 +192,7 @@ http://perpustakaan.test
 
 ---
 
-## Opsi 2 — Linux Native (Apache + systemctl)
+### Opsi 3 — Linux Native (Apache)
 
 Install dependency:
 
@@ -185,15 +212,15 @@ Clone project:
 
 ```bash
 cd /var/www
-sudo git clone git@github.com:alhilalakbar/perpustakaan.git
+sudo git clone https://github.com/alhilalakbar/perpustakaan.git
 ```
 
 Set permission:
 
 ```bash
-sudo chown -R $USER:$USER /var/www/perpustakaan
+sudo chown -R $USER:www-data /var/www/perpustakaan
 cd /var/www/perpustakaan
-chmod -R 775 writable
+sudo chmod -R 775 writable
 ```
 
 Install dependency:
@@ -202,13 +229,13 @@ Install dependency:
 composer install
 ```
 
-Buat `.env`:
+Buat file environment:
 
 ```bash
 cp env .env
 ```
 
-Edit `.env`:
+Edit `.env` jika diperlukan:
 
 ```env
 app.baseURL = 'http://perpustakaan.test/'
@@ -225,7 +252,7 @@ CREATE DATABASE perpus_db;
 EXIT;
 ```
 
-Import:
+Import database:
 
 ```bash
 mysql -u root -p perpus_db < perpus_db.sql
@@ -278,23 +305,7 @@ http://perpustakaan.test
 
 ---
 
-## Opsi 3 — Development Server
-
-Untuk testing cepat:
-
-```bash
-php spark serve
-```
-
-Akses:
-
-```text
-http://localhost:8080
-```
-
----
-
-# Struktur Project
+## Struktur Project
 
 ```text
 app/
@@ -302,13 +313,17 @@ public/
 vendor/
 writable/
 perpus_db.sql
+env
+README.md
 ```
 
 ---
 
-# Troubleshooting
+## Troubleshooting
 
-## Error vendor not found
+### Error vendor not found
+
+Jalankan:
 
 ```bash
 composer install
@@ -316,11 +331,12 @@ composer install
 
 ---
 
-## Error database connection
+### Error database connection
 
-Pastikan `.env`:
+Pastikan konfigurasi database di `.env` sesuai:
 
 ```env
+database.default.hostname = localhost
 database.default.database = perpus_db
 database.default.username = root
 database.default.password =
@@ -328,7 +344,7 @@ database.default.password =
 
 ---
 
-## URL masih ada index.php
+### URL masih menampilkan index.php
 
 Pastikan:
 
@@ -336,16 +352,34 @@ Pastikan:
 app.indexPage = ''
 ```
 
-dan Apache rewrite aktif.
+dan Apache rewrite sudah aktif.
 
 ---
 
-# Catatan
+### Permission denied pada folder writable
 
-Project ini menggunakan import database manual melalui file:
+Jalankan:
+
+```bash
+sudo chmod -R 775 writable
+```
+
+atau:
+
+```bash
+sudo chown -R www-data:www-data writable
+```
+
+---
+
+## Catatan
+
+Project ini menggunakan setup database manual melalui file:
 
 ```text
 perpus_db.sql
 ```
 
-bukan migration otomatis.
+dan **tidak menggunakan migration otomatis**.
+
+Pastikan file `.env` tidak ikut di-push ke repository karena berisi konfigurasi environment lokal.
