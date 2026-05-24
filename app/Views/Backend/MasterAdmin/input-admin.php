@@ -5,7 +5,8 @@
             <li>Master Data Admin</li>
             <li class="active">Input Data Admin</li>
         </ol>
-    </div><!--/.row-->
+    </div>
+    <!--/.row-->
 
     <div class="row">
         <div class="col-md-12">
@@ -16,13 +17,16 @@
                     <form action="<?php echo base_url('admin/simpan-admin');?>" method="post">
                         <div class="form-group col-md-6">
                             <label>Nama Admin</label>
-                            <input type="text" class="form-control" name="nama" placeholder="Masukkan Nama Admin" required="required">
+                            <input type="text" class="form-control" name="nama" placeholder="Masukkan Nama Admin"
+                                required="required">
                         </div>
                         <div style="clear:both;"></div>
 
                         <div class="form-group col-md-6">
                             <label>Username Admin</label>
-                            <input type="text" class="form-control" onKeyPress="return goodchars(event, 'abcdefghijklmnopqrstuvwxyz_ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890', this)" name="username" placeholder="Masukkan Username Admin" required="required">
+                            <input type="text" class="form-control"
+                                onKeyPress="return goodchars(event, 'abcdefghijklmnopqrstuvwxyz_ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890', this)"
+                                name="username" placeholder="Masukkan Username Admin" required="required">
                         </div>
                         <div style="clear:both;"></div>
 
@@ -37,15 +41,25 @@
                         <div style="clear:both;"></div>
 
                         <div class="form-group col-md-6">
-                            <button type="submit" class="btn btn-primary">Simpan</button>
-                            <button type="reset" class="btn btn-danger">Batal</button>
+                            <button type="submit" class="btn btn-primary">
+                                Simpan
+                            </button>
+
+                            <button type="reset" class="btn btn-warning">
+                                Reset
+                            </button>
+
+                            <a href="<?= base_url('admin/master-data-admin'); ?>" class="btn btn-danger">
+                                Batal
+                            </a>
                         </div>
                         <div style="clear:both;"></div>
                     </form>
                 </div>
             </div>
         </div>
-        
-    </div><!--/.row-->
+
+    </div>
+    <!--/.row-->
 
 </div>

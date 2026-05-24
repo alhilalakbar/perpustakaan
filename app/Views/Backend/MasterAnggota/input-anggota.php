@@ -64,8 +64,17 @@
                         <div style="clear:both;"></div>
 
                         <div class="form-group col-md-6">
-                            <button class="btn btn-primary">Simpan</button>
-                            <button type="reset" class="btn btn-danger">Batal</button>
+                            <button type="submit" class="btn btn-primary">
+                                Simpan
+                            </button>
+
+                            <button type="reset" class="btn btn-warning">
+                                Reset
+                            </button>
+
+                            <a href="<?= base_url('admin/master-data-anggota'); ?>" class="btn btn-danger">
+                                Batal
+                            </a>
                         </div>
 
                         <div style="clear:both;"></div>

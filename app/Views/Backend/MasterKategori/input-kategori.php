@@ -17,14 +17,24 @@
 
                         <div class="form-group col-md-6">
                             <label>Nama Kategori</label>
-                            <input type="text" class="form-control" name="nama" placeholder="Masukkan Nama Kategori" required="required">
+                            <input type="text" class="form-control" name="nama" placeholder="Masukkan Nama Kategori"
+                                required="required">
                         </div>
 
                         <div style="clear:both;"></div>
 
                         <div class="form-group col-md-6">
-                            <button type="submit" class="btn btn-primary">Simpan</button>
-                            <button type="reset" class="btn btn-danger">Batal</button>
+                            <button type="submit" class="btn btn-primary">
+                                Simpan
+                            </button>
+
+                            <button type="reset" class="btn btn-warning">
+                                Reset
+                            </button>
+
+                            <a href="<?= base_url('admin/master-data-kategori'); ?>" class="btn btn-danger">
+                                Batal
+                            </a>
                         </div>
 
                         <div style="clear:both;"></div>
