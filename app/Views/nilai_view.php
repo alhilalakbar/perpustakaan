@@ -1,0 +1,1 @@
+nilai anda adalah <?= $nilai ?>, maka grade anda adalah <?= $grade ?>.

@@ -1,0 +1,79 @@
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
+            <li>Master Data Anggota</li>
+            <li class="active">Input Anggota</li>
+        </ol>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>Input Anggota</h3>
+                    <hr />
+
+                    <form action="<?= base_url('admin/simpan-data-anggota');?>" method="post">
+
+                        <div class="form-group col-md-6">
+                            <label>Nama</label>
+                            <input type="text" name="nama" class="form-control" required>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label>Jenis Kelamin</label>
+                            <select name="jk" class="form-control" required>
+                                <option value="">-- Pilih --</option>
+                                <option value="L">Laki-laki</option>
+                                <option value="P">Perempuan</option>
+                            </select>
+                        </div>
+
+                        <div style="clear:both;"></div>
+
+                        <div class="form-group col-md-6">
+                            <label>No Telepon</label>
+                            <input type="text" name="no_tlp" class="form-control" required>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label>Email</label>
+                            <input type="email" name="email" class="form-control" required>
+                        </div>
+
+                        <div style="clear:both;"></div>
+
+                        <div class="form-group col-md-6">
+                            <label>Alamat</label>
+                            <textarea name="alamat" class="form-control" required></textarea>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label>Username</label>
+                            <input type="text" name="username" class="form-control" required>
+                        </div>
+
+                        <div style="clear:both;"></div>
+
+                        <div class="form-group col-md-6">
+                            <label>Password</label>
+                            <input type="password" name="password" class="form-control" required>
+                        </div>
+
+                        <div style="clear:both;"></div>
+
+                        <div class="form-group col-md-6">
+                            <button class="btn btn-primary">Simpan</button>
+                            <button type="reset" class="btn btn-danger">Batal</button>
+                        </div>
+
+                        <div style="clear:both;"></div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
