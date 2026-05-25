@@ -33,7 +33,7 @@
                     <!-- KERANJANG -->
                     <h3>Keranjang Peminjaman Buku</h3>
 
-                    <table data-toggle="table" class="table table-bordered">
+                    <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <th>No</th>

@@ -40,10 +40,10 @@ class Admin extends BaseController
         session()->remove('ses_level');
         session()->setFlashdata('info', 'Anda Berhasil Logout!');
         ?>
-<script>
-document.location = "<?= base_url('admin/login-admin'); ?>";
-</script>
-<?php
+        <script>
+            document.location = "<?= base_url('admin/login-admin'); ?>";
+        </script>
+        <?php
     }
 
     public function dashboard()
@@ -55,31 +55,31 @@ document.location = "<?= base_url('admin/login-admin'); ?>";
         ) {
             session()->setFlashdata('error', 'Silahkan Login Terlebih Dahulu!');
             ?>
-<script>
-document.location = "<?= base_url('admin/login-admin'); ?>";
-</script>
-<?php
+            <script>
+                document.location = "<?= base_url('admin/login-admin'); ?>";
+            </script>
+            <?php
             return;
         }
 
         $dashboard = new M_Dashboard();
 
         $data = [
-            'totalAnggota'       => $dashboard->totalAnggota(),
-            'totalBuku'          => $dashboard->totalBuku(),
-            'totalKategori'      => $dashboard->totalKategori(),
-            'totalStok'          => $dashboard->totalStok(),
-            'totalDipinjam'      => $dashboard->totalDipinjam(),
-            'totalKembali'       => $dashboard->totalDikembalikan(),
-            'totalTerlambat'     => $dashboard->totalTerlambat(),
-            'totalDenda'         => $dashboard->totalDenda(),
-            'transaksiHariIni'   => $dashboard->transaksiHariIni(),
-            'transaksiTerbaru'   => $dashboard->transaksiTerbaru(),
-            'bukuPopuler'        => $dashboard->bukuPopuler(),
-            'anggotaAktif'       => $dashboard->anggotaAktif(),
-            'grafikPeminjaman'   => $dashboard->grafikPeminjaman(),
+            'totalAnggota' => $dashboard->totalAnggota(),
+            'totalBuku' => $dashboard->totalBuku(),
+            'totalKategori' => $dashboard->totalKategori(),
+            'totalStok' => $dashboard->totalStok(),
+            'totalDipinjam' => $dashboard->totalDipinjam(),
+            'totalKembali' => $dashboard->totalDikembalikan(),
+            'totalTerlambat' => $dashboard->totalTerlambat(),
+            'totalDenda' => $dashboard->totalDenda(),
+            'transaksiHariIni' => $dashboard->transaksiHariIni(),
+            'transaksiTerbaru' => $dashboard->transaksiTerbaru(),
+            'bukuPopuler' => $dashboard->bukuPopuler(),
+            'anggotaAktif' => $dashboard->anggotaAktif(),
+            'grafikPeminjaman' => $dashboard->grafikPeminjaman(),
             'grafikPengembalian' => $dashboard->grafikPengembalian(),
-            'stokMenipis'        => $dashboard->stokMenipis(),
+            'stokMenipis' => $dashboard->stokMenipis(),
         ];
 
         echo view('Backend/Template/header', $data);
@@ -105,10 +105,10 @@ document.location = "<?= base_url('admin/login-admin'); ?>";
         if ($cekUsername == 0) {
             session()->setFlashdata('error', 'Username Tidak Ditemukan');
             ?>
-<script>
-history.go(-1);
-</script>
-<?php
+            <script>
+                history.go(-1);
+            </script>
+            <?php
         } else {
 
             $dataUser = $modelAdmin
@@ -125,25 +125,25 @@ history.go(-1);
             if (!$verifikasiPassword) {
                 session()->setFlashdata('error', 'Password Tidak Sesuai!');
                 ?>
-<script>
-history.go(-1);
-</script>
-<?php
+                <script>
+                    history.go(-1);
+                </script>
+                <?php
             } else {
 
                 $dataSession = [
-                    'ses_id'    => $dataUser['id_admin'],
-                    'ses_user'  => $dataUser['nama_admin'],
+                    'ses_id' => $dataUser['id_admin'],
+                    'ses_user' => $dataUser['nama_admin'],
                     'ses_level' => $dataUser['akses_level'],
                 ];
 
                 session()->set($dataSession);
                 session()->setFlashdata('success', 'Login Berhasil!');
                 ?>
-<script>
-document.location = "<?= base_url('admin/dashboard-admin'); ?>";
-</script>
-<?php
+                <script>
+                    document.location = "<?= base_url('admin/dashboard-admin'); ?>";
+                </script>
+                <?php
             }
         }
     }
@@ -159,10 +159,10 @@ document.location = "<?= base_url('admin/dashboard-admin'); ?>";
         ) {
             session()->setFlashdata('error', 'Silakan login terlebih dahulu!');
             ?>
-<script>
-document.location = "<?= base_url('admin/login-admin'); ?>";
-</script>
-<?php
+            <script>
+                document.location = "<?= base_url('admin/login-admin'); ?>";
+            </script>
+            <?php
         } else {
 
             echo view('Backend/Template/header');
@@ -181,17 +181,17 @@ document.location = "<?= base_url('admin/login-admin'); ?>";
         ) {
             session()->setFlashdata('error', 'Silakan login terlebih dahulu!');
             ?>
-<script>
-document.location = "<?= base_url('admin/login-admin'); ?>";
-</script>
-<?php
+            <script>
+                document.location = "<?= base_url('admin/login-admin'); ?>";
+            </script>
+            <?php
         } else {
 
             $modelAdmin = new M_Admin();
 
-            $nama     = $this->request->getPost('nama');
+            $nama = $this->request->getPost('nama');
             $username = $this->request->getPost('username');
-            $level    = $this->request->getPost('level');
+            $level = $this->request->getPost('level');
 
             $cekUname = $modelAdmin
                 ->getDataAdmin(['username_admin' => $username])
@@ -200,10 +200,10 @@ document.location = "<?= base_url('admin/login-admin'); ?>";
             if ($cekUname > 0) {
                 session()->setFlashdata('error', 'Username sudah digunakan!!');
                 ?>
-<script>
-history.go(-1);
-</script>
-<?php
+                <script>
+                    history.go(-1);
+                </script>
+                <?php
             } else {
 
                 $hasil = $modelAdmin->autoNumber()->getRowArray();
@@ -211,7 +211,7 @@ history.go(-1);
                 if (!$hasil) {
                     $id = "ADM001";
                 } else {
-                    $kode   = $hasil['id_admin'];
+                    $kode = $hasil['id_admin'];
                     $noUrut = (int) substr($kode, -3);
                     $noUrut++;
 
@@ -219,24 +219,24 @@ history.go(-1);
                 }
 
                 $dataSimpan = [
-                    'id_admin'        => $id,
-                    'nama_admin'      => $nama,
-                    'username_admin'  => $username,
-                    'password_admin'  => password_hash('pass_admin', PASSWORD_DEFAULT),
-                    'akses_level'     => $level,
+                    'id_admin' => $id,
+                    'nama_admin' => $nama,
+                    'username_admin' => $username,
+                    'password_admin' => password_hash('pass_admin', PASSWORD_DEFAULT),
+                    'akses_level' => $level,
                     'is_delete_admin' => '0',
-                    'created_at'      => date('Y-m-d H:i:s'),
-                    'updated_at'      => date('Y-m-d H:i:s')
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s')
                 ];
 
                 $modelAdmin->saveDataAdmin($dataSimpan);
 
                 session()->setFlashdata('success', 'Data Admin Berhasil Ditambahkan!!');
                 ?>
-<script>
-document.location = "<?= base_url('admin/master-data-admin'); ?>";
-</script>
-<?php
+                <script>
+                    document.location = "<?= base_url('admin/master-data-admin'); ?>";
+                </script>
+                <?php
             }
         }
     }
@@ -245,10 +245,10 @@ document.location = "<?= base_url('admin/master-data-admin'); ?>";
         if (session()->get('ses_id') == "" or session()->get('ses_user') == "" or session()->get('ses_level') == "") {
             session()->setFlashdata('error', 'Silakan login terlebih dahulu!');
             ?>
-<script>
-document.location = "<?= base_url('admin/login-admin');?>";
-</script>
-<?php
+            <script>
+                document.location = "<?= base_url('admin/login-admin'); ?>";
+            </script>
+            <?php
         } else {
             $modelAdmin = new M_Admin(); // inisiasi
 
@@ -300,10 +300,10 @@ document.location = "<?= base_url('admin/login-admin');?>";
         if ($nama == "" or $level == "") {
             session()->setFlashdata('error', 'Isian tidak boleh kosong!!');
             ?>
-<script>
-history.go(-1);
-</script>
-<?php
+            <script>
+                history.go(-1);
+            </script>
+            <?php
         } else {
             $dataUpdate = [
                 'nama_admin' => $nama,
@@ -316,10 +316,10 @@ history.go(-1);
             session()->remove('idUpdate');
             session()->setFlashdata('success', 'Data Admin Berhasil Diperbaharui!');
             ?>
-<script>
-document.location = "<?= base_url('admin/master-data-admin');?>";
-</script>
-<?php
+            <script>
+                document.location = "<?= base_url('admin/master-data-admin'); ?>";
+            </script>
+            <?php
         }
     }
 
@@ -339,10 +339,10 @@ document.location = "<?= base_url('admin/master-data-admin');?>";
         $modelAdmin->updateDataAdmin($dataUpdate, $whereUpdate);
         session()->setFlashdata('success', 'Data Admin Berhasil Dihapus!');
         ?>
-<script>
-document.location = "<?= base_url('admin/master-data-admin');?>";
-</script>
-<?php
+        <script>
+            document.location = "<?= base_url('admin/master-data-admin'); ?>";
+        </script>
+        <?php
     }
 
     // MASTER KATEGORI
@@ -351,10 +351,10 @@ document.location = "<?= base_url('admin/master-data-admin');?>";
         if (session()->get('ses_id') == "" || session()->get('ses_user') == "" || session()->get('ses_level') == "") {
             session()->setFlashdata('error', 'Silakan login terlebih dahulu!');
             ?>
-<script>
-document.location = "<?= base_url('admin/login-admin');?>";
-</script>
-<?php
+            <script>
+                document.location = "<?= base_url('admin/login-admin'); ?>";
+            </script>
+            <?php
         } else {
             $modelKategori = new M_Kategori();
             $data['data_kategori'] = $modelKategori->getDataKategori()->getResultArray();
@@ -371,10 +371,10 @@ document.location = "<?= base_url('admin/login-admin');?>";
         if (session()->get('ses_id') == "" || session()->get('ses_user') == "" || session()->get('ses_level') == "") {
             session()->setFlashdata('error', 'Silakan login terlebih dahulu!');
             ?>
-<script>
-document.location = "<?= base_url('admin/login-admin');?>";
-</script>
-<?php
+            <script>
+                document.location = "<?= base_url('admin/login-admin'); ?>";
+            </script>
+            <?php
         } else {
             echo view('Backend/Template/header');
             echo view('Backend/Template/sidebar');
@@ -388,10 +388,10 @@ document.location = "<?= base_url('admin/login-admin');?>";
         if (session()->get('ses_id') == "" || session()->get('ses_user') == "" || session()->get('ses_level') == "") {
             session()->setFlashdata('error', 'Silakan login terlebih dahulu!');
             ?>
-<script>
-document.location = "<?= base_url('admin/login-admin');?>";
-</script>
-<?php
+            <script>
+                document.location = "<?= base_url('admin/login-admin'); ?>";
+            </script>
+            <?php
         } else {
             $modelKategori = new M_Kategori();
 
@@ -401,10 +401,10 @@ document.location = "<?= base_url('admin/login-admin');?>";
             if ($cek > 0) {
                 session()->setFlashdata('error', 'Kategori sudah ada!');
                 ?>
-<script>
-history.go(-1);
-</script>
-<?php
+                <script>
+                    history.go(-1);
+                </script>
+                <?php
             } else {
                 $hasil = $modelKategori->autoNumber()->getRowArray();
 
@@ -429,10 +429,10 @@ history.go(-1);
 
                 session()->setFlashdata('success', 'Data berhasil ditambahkan!');
                 ?>
-<script>
-document.location = "<?= base_url('admin/master-data-kategori');?>";
-</script>
-<?php
+                <script>
+                    document.location = "<?= base_url('admin/master-data-kategori'); ?>";
+                </script>
+                <?php
             }
         }
     }
@@ -442,10 +442,10 @@ document.location = "<?= base_url('admin/master-data-kategori');?>";
         if (session()->get('ses_id') == "" || session()->get('ses_user') == "" || session()->get('ses_level') == "") {
             session()->setFlashdata('error', 'Silakan login terlebih dahulu!');
             ?>
-<script>
-document.location = "<?= base_url('admin/login-admin');?>";
-</script>
-<?php
+            <script>
+                document.location = "<?= base_url('admin/login-admin'); ?>";
+            </script>
+            <?php
         } else {
             $modelKategori = new \App\Models\M_Kategori();
 
@@ -468,10 +468,10 @@ document.location = "<?= base_url('admin/login-admin');?>";
         if (session()->get('ses_id') == "" || session()->get('ses_user') == "" || session()->get('ses_level') == "") {
             session()->setFlashdata('error', 'Silakan login terlebih dahulu!');
             ?>
-<script>
-document.location = "<?= base_url('admin/login-admin');?>";
-</script>
-<?php
+            <script>
+                document.location = "<?= base_url('admin/login-admin'); ?>";
+            </script>
+            <?php
         } else {
             $modelKategori = new \App\Models\M_Kategori();
 
@@ -489,10 +489,10 @@ document.location = "<?= base_url('admin/login-admin');?>";
 
             session()->setFlashdata('success', 'Data berhasil diupdate!');
             ?>
-<script>
-document.location = "<?= base_url('admin/master-data-kategori');?>";
-</script>
-<?php
+            <script>
+                document.location = "<?= base_url('admin/master-data-kategori'); ?>";
+            </script>
+            <?php
         }
     }
 
@@ -514,10 +514,10 @@ document.location = "<?= base_url('admin/master-data-kategori');?>";
 
         session()->setFlashdata('success', 'Data berhasil dihapus!');
         ?>
-<script>
-document.location = "<?= base_url('admin/master-data-kategori');?>";
-</script>
-<?php
+        <script>
+            document.location = "<?= base_url('admin/master-data-kategori'); ?>";
+        </script>
+        <?php
     }
 
     // MASTER RAK
@@ -553,11 +553,11 @@ document.location = "<?= base_url('admin/master-data-kategori');?>";
 
         if ($cek > 0) {
             ?>
-<script>
-alert('Rak sudah ada');
-history.go(-1);
-</script>
-<?php
+            <script>
+                alert('Rak sudah ada');
+                history.go(-1);
+            </script>
+            <?php
         } else {
 
             $hasil = $model->autoNumber()->getRowArray();
@@ -582,10 +582,10 @@ history.go(-1);
             $model->saveDataRak($data);
 
             ?>
-<script>
-document.location = "<?= base_url('admin/master-data-rak'); ?>"
-</script>
-<?php
+            <script>
+                document.location = "<?= base_url('admin/master-data-rak'); ?>"
+            </script>
+            <?php
         }
     }
 
@@ -625,10 +625,10 @@ document.location = "<?= base_url('admin/master-data-rak'); ?>"
         session()->remove('idUpdate');
 
         ?>
-<script>
-document.location = "<?= base_url('admin/master-data-rak'); ?>"
-</script>
-<?php
+        <script>
+            document.location = "<?= base_url('admin/master-data-rak'); ?>"
+        </script>
+        <?php
     }
 
     public function hapus_data_rak()
@@ -644,10 +644,10 @@ document.location = "<?= base_url('admin/master-data-rak'); ?>"
         ], ['sha1(id_rak)' => $id]);
 
         ?>
-<script>
-document.location = "<?= base_url('admin/master-data-rak'); ?>"
-</script>
-<?php
+        <script>
+            document.location = "<?= base_url('admin/master-data-rak'); ?>"
+        </script>
+        <?php
     }
 
     // MASTER ANGGOTA
@@ -656,10 +656,10 @@ document.location = "<?= base_url('admin/master-data-rak'); ?>"
         if (session()->get('ses_id') == "" || session()->get('ses_user') == "") {
             session()->setFlashdata('error', 'Silahkan login!');
             ?>
-<script>
-document.location = "<?= base_url('admin/login-admin');?>";
-</script>
-<?php
+            <script>
+                document.location = "<?= base_url('admin/login-admin'); ?>";
+            </script>
+            <?php
         }
 
         $model = new \App\Models\M_Anggota();
@@ -683,11 +683,11 @@ document.location = "<?= base_url('admin/login-admin');?>";
     {
         $model = new \App\Models\M_Anggota();
 
-        $nama     = $this->request->getPost('nama');
-        $jk       = $this->request->getPost('jk');
-        $no_tlp   = $this->request->getPost('no_tlp');
-        $alamat   = $this->request->getPost('alamat');
-        $email    = $this->request->getPost('email');
+        $nama = $this->request->getPost('nama');
+        $jk = $this->request->getPost('jk');
+        $no_tlp = $this->request->getPost('no_tlp');
+        $alamat = $this->request->getPost('alamat');
+        $email = $this->request->getPost('email');
         $username = $this->request->getPost('username');
         $password = $this->request->getPost('password');
 
@@ -719,10 +719,10 @@ document.location = "<?= base_url('admin/login-admin');?>";
 
         session()->setFlashdata('success', 'Data berhasil ditambahkan!');
         ?>
-<script>
-document.location = "<?= base_url('admin/master-data-anggota');?>";
-</script>
-<?php
+        <script>
+            document.location = "<?= base_url('admin/master-data-anggota'); ?>";
+        </script>
+        <?php
     }
 
     public function edit_data_anggota()
@@ -743,12 +743,12 @@ document.location = "<?= base_url('admin/master-data-anggota');?>";
     {
         $model = new \App\Models\M_Anggota();
 
-        $id      = $this->request->getPost('id');
-        $nama    = $this->request->getPost('nama');
-        $jk      = $this->request->getPost('jk');
-        $no_tlp  = $this->request->getPost('no_tlp');
-        $alamat  = $this->request->getPost('alamat');
-        $email   = $this->request->getPost('email');
+        $id = $this->request->getPost('id');
+        $nama = $this->request->getPost('nama');
+        $jk = $this->request->getPost('jk');
+        $no_tlp = $this->request->getPost('no_tlp');
+        $alamat = $this->request->getPost('alamat');
+        $email = $this->request->getPost('email');
         $password = $this->request->getPost('password');
 
         $data = [
@@ -768,10 +768,10 @@ document.location = "<?= base_url('admin/master-data-anggota');?>";
 
         session()->setFlashdata('success', 'Data berhasil diupdate!');
         ?>
-<script>
-document.location = "<?= base_url('admin/master-data-anggota');?>";
-</script>
-<?php
+        <script>
+            document.location = "<?= base_url('admin/master-data-anggota'); ?>";
+        </script>
+        <?php
     }
 
     public function hapus_data_anggota()
@@ -789,10 +789,10 @@ document.location = "<?= base_url('admin/master-data-anggota');?>";
 
         session()->setFlashdata('success', 'Data berhasil dihapus!');
         ?>
-<script>
-document.location = "<?= base_url('admin/master-data-anggota');?>";
-</script>
-<?php
+        <script>
+            document.location = "<?= base_url('admin/master-data-anggota'); ?>";
+        </script>
+        <?php
     }
 
 
@@ -849,17 +849,21 @@ document.location = "<?= base_url('admin/master-data-anggota');?>";
         $rak = $this->request->getPost('rak');
 
         // 1. Validasi File Cover Buku
-        if (!$this->validate([
-            'cover_buku' => 'uploaded[cover_buku]|max_size[cover_buku, 1024]|ext_in[cover_buku,jpg,jpeg,png]',
-        ])) {
+        if (
+            !$this->validate([
+                'cover_buku' => 'uploaded[cover_buku]|max_size[cover_buku, 1024]|ext_in[cover_buku,jpg,jpeg,png]',
+            ])
+        ) {
             session()->setFlashdata('error', "Format file yang diizinkan : jpg, jpeg, png dengan maksimal ukuran 1 MB");
             return redirect()->to('/admin/input-buku')->withInput();
         }
 
         // 2. Validasi File E-Book
-        if (!$this->validate([
-            'e_book' => 'uploaded[e_book]|max_size[e_book, 10240]|ext_in[e_book,pdf]',
-        ])) {
+        if (
+            !$this->validate([
+                'e_book' => 'uploaded[e_book]|max_size[e_book, 10240]|ext_in[e_book,pdf]',
+            ])
+        ) {
             session()->setFlashdata('error', "Format file yang diizinkan : pdf dengan maksimal ukuran 10 MB");
             return redirect()->to('/admin/input-buku')->withInput();
         }
@@ -867,13 +871,13 @@ document.location = "<?= base_url('admin/master-data-anggota');?>";
         // 3. Proses Upload Cover Buku
         $coverBuku = $this->request->getFile('cover_buku');
         $ext1 = $coverBuku->getClientExtension();
-        $namaFile1 = "Cover-Buku-".date("ymdHis").".".$ext1;
+        $namaFile1 = "Cover-Buku-" . date("ymdHis") . "." . $ext1;
         $coverBuku->move('Assets/CoverBuku', $namaFile1);
 
         // 4. Proses Upload E-Book
         $eBook = $this->request->getFile('e_book');
         $ext2 = $eBook->getClientExtension();
-        $namaFile2 = "E-Book-".date("ymdHis").".".$ext2;
+        $namaFile2 = "E-Book-" . date("ymdHis") . "." . $ext2;
         $eBook->move('Assets/E-Book', $namaFile2);
 
         // 5. Pembuatan ID Buku Otomatis
@@ -884,7 +888,7 @@ document.location = "<?= base_url('admin/master-data-anggota');?>";
             $kode = $hasil['id_buku'];
             $noUrut = (int) substr($kode, -3);
             $noUrut++;
-            $id = "BKU".sprintf("%03s", $noUrut);
+            $id = "BKU" . sprintf("%03s", $noUrut);
         }
 
         // 6. Menyusun Data untuk Disimpan
@@ -909,10 +913,10 @@ document.location = "<?= base_url('admin/master-data-anggota');?>";
         $modelBuku->saveDataBuku($dataSimpan);
         session()->setFlashdata('success', 'Data Buku Berhasil Diperbaharui!');
         ?>
-<script>
-document.location = "<?= base_url('admin/master-data-buku');?>";
-</script>
-<?php
+        <script>
+            document.location = "<?= base_url('admin/master-data-buku'); ?>";
+        </script>
+        <?php
     }
 
     public function hapus_buku($id)
@@ -928,10 +932,10 @@ document.location = "<?= base_url('admin/master-data-buku');?>";
 
         session()->setFlashdata('success', 'Data Buku Berhasil Dihapus!');
         ?>
-<script>
-document.location = "<?= base_url('admin/master-data-buku');?>";
-</script>
-<?php
+        <script>
+            document.location = "<?= base_url('admin/master-data-buku'); ?>";
+        </script>
+        <?php
     }
 
     public function edit_buku($id)
@@ -970,11 +974,11 @@ document.location = "<?= base_url('admin/master-data-buku');?>";
         // COVER
         if ($cover && $cover->isValid() && !$cover->hasMoved()) {
             $ext = $cover->getClientExtension();
-            $namaCover = "Cover-Buku-".date("ymdHis").".".$ext;
+            $namaCover = "Cover-Buku-" . date("ymdHis") . "." . $ext;
             $cover->move('Assets/CoverBuku', $namaCover);
 
-            if (file_exists('Assets/CoverBuku/'.$dataLama['cover_buku'])) {
-                unlink('Assets/CoverBuku/'.$dataLama['cover_buku']);
+            if (file_exists('Assets/CoverBuku/' . $dataLama['cover_buku'])) {
+                unlink('Assets/CoverBuku/' . $dataLama['cover_buku']);
             }
         } else {
             $namaCover = $dataLama['cover_buku'];
@@ -983,11 +987,11 @@ document.location = "<?= base_url('admin/master-data-buku');?>";
         // EBOOK
         if ($ebook && $ebook->isValid() && !$ebook->hasMoved()) {
             $ext2 = $ebook->getClientExtension();
-            $namaEbook = "E-Book-".date("ymdHis").".".$ext2;
+            $namaEbook = "E-Book-" . date("ymdHis") . "." . $ext2;
             $ebook->move('Assets/E-Book', $namaEbook);
 
-            if (file_exists('Assets/E-Book/'.$dataLama['e_book'])) {
-                unlink('Assets/E-Book/'.$dataLama['e_book']);
+            if (file_exists('Assets/E-Book/' . $dataLama['e_book'])) {
+                unlink('Assets/E-Book/' . $dataLama['e_book']);
             }
         } else {
             $namaEbook = $dataLama['e_book'];
@@ -1011,10 +1015,10 @@ document.location = "<?= base_url('admin/master-data-buku');?>";
 
         session()->setFlashdata('success', 'Data Buku Berhasil Diupdate!');
         ?>
-<script>
-document.location = "<?= base_url('admin/master-data-buku');?>";
-</script>
-<?php
+        <script>
+            document.location = "<?= base_url('admin/master-data-buku'); ?>";
+        </script>
+        <?php
     }
 
     // Akhir Modul Buku
@@ -1025,7 +1029,7 @@ document.location = "<?= base_url('admin/master-data-buku');?>";
         $uri = service('uri');
 
         $data = [
-            'page'      => $uri->getSegment(2),
+            'page' => $uri->getSegment(2),
             'web_title' => "Transaksi Peminjaman"
         ];
 
@@ -1038,131 +1042,160 @@ document.location = "<?= base_url('admin/master-data-buku');?>";
 
     public function peminjaman_step2()
     {
-
-        $id_anggota = $this->request->getPost('id_anggota');
-
-        $cekAnggota = $this->db->table('tbl_anggota')
-                               ->where('id_anggota', $id_anggota)
-                               ->get()
-                               ->getRowArray();
-
-        if (!$cekAnggota) {
-
-            session()->setFlashdata('error', 'ID Anggota tidak ditemukan');
-
-            return redirect()->to(base_url('admin/peminjaman-step-1'));
-        }
-        // Inisialisasi Model
-        $modelAnggota    = new M_Anggota();
-        $modelBuku       = new M_Buku();
+        $modelAnggota = new M_Anggota();
+        $modelBuku = new M_Buku();
         $modelPeminjaman = new M_Peminjaman();
 
-        $uri  = service('uri');
+        $uri = service('uri');
         $page = $uri->getSegment(2);
 
-        // 1. Logika Pengambilan ID Anggota
+        // ambil id anggota
         $idAnggota = $this->request->getPost('id_anggota');
 
-        if ($idAnggota) {
-            session()->set(['idAgt' => $idAnggota]);
+        if (!empty($idAnggota)) {
+            session()->set('idAgt', $idAnggota);
         } else {
             $idAnggota = session()->get('idAgt');
         }
 
-        // 2. Cek Validasi Peminjaman Berjalan
-        $cekPeminjaman = $modelPeminjaman->getDataPeminjaman([
-            'id_anggota'       => $idAnggota,
-            'status_transaksi' => "Berjalan"
+        if (empty($idAnggota)) {
+            session()->setFlashdata('error', 'ID anggota tidak ditemukan.');
+            return redirect()->to(base_url('admin/peminjaman-step-1'));
+        }
+
+        // validasi anggota
+        $dataAnggota = $modelAnggota->getDataAnggota([
+            'id_anggota' => $idAnggota
+        ])->getRowArray();
+
+        if (!$dataAnggota) {
+            session()->remove('idAgt');
+            session()->setFlashdata('error', 'Anggota tidak ditemukan.');
+            return redirect()->to(base_url('admin/peminjaman-step-1'));
+        }
+
+        // ambil data temp
+        $dataTemp = $modelPeminjaman->getDataTempJoin([
+            'tbl_temp_peminjaman.id_anggota' => $idAnggota
+        ])->getResultArray();
+
+        $jumlahTemp = $modelPeminjaman->getDataTemp([
+            'id_anggota' => $idAnggota
         ])->getNumRows();
 
-        if ($cekPeminjaman > 0) {
-            session()->setFlashdata('error', 'Transaksi Tidak Dapat Dilakukan, Masih Ada Transaksi Peminjaman yang Belum Diselesaikan!!');
+        // hanya cek pinjaman aktif jika keranjang kosong
+        if ($jumlahTemp == 0) {
+            $cekPeminjaman = $modelPeminjaman->getDataPeminjaman([
+                'id_anggota' => $idAnggota,
+                'status_transaksi' => 'Berjalan'
+            ])->getNumRows();
 
-            // Kembali ke halaman sebelumnya jika masih ada tanggungan pinjaman
-            return redirect()->back();
+            if ($cekPeminjaman > 0) {
+                session()->setFlashdata(
+                    'error',
+                    'Masih ada transaksi peminjaman yang belum selesai.'
+                );
+
+                return redirect()->to(base_url('admin/peminjaman-step-1'));
+            }
         }
 
-        // 3. Jika Validasi Lolos, Ambil Data untuk View
-        else {
-            $dataAnggota = $modelAnggota->getDataAnggota(['id_anggota' => $idAnggota])->getRowArray();
-            $dataBuku    = $modelBuku->getDataBukuJoin()->getResultArray();
-            $dataTemp    = $modelPeminjaman->getDataTempJoin(['tbl_temp_peminjaman.id_anggota' => $idAnggota])->getResultArray();
+        $dataBuku = $modelBuku->getDataBukuJoin([
+            'tbl_buku.is_delete_buku' => '0'
+        ])->getResultArray();
 
-            $jumlahTemp  = $modelPeminjaman->getDataTemp(['id_anggota' => $idAnggota])->getNumRows();
+        $data = [
+            'page' => $page,
+            'web_title' => 'Transaksi Peminjaman',
+            'dataAnggota' => $dataAnggota,
+            'dataBuku' => $dataBuku,
+            'dataTemp' => $dataTemp,
+            'jumlahTemp' => $jumlahTemp
+        ];
 
-            $data = [
-                'page'         => $page,
-                'web_title'    => "Transaksi Peminjaman",
-                'dataAnggota'  => $dataAnggota,
-                'dataBuku'     => $dataBuku,
-                'dataTemp'     => $dataTemp,
-                'jumlahTemp'   => $jumlahTemp
-            ];
-
-            // 4. Load View (Header, Sidebar, Content, Footer)
-            return view('Backend/Template/header', $data)
-                . view('Backend/Template/sidebar', $data)
-                . view('Backend/Transaksi/peminjaman-step-2', $data)
-                . view('Backend/Template/footer', $data);
-        }
+        return view('Backend/Template/header', $data)
+            . view('Backend/Template/sidebar', $data)
+            . view('Backend/Transaksi/peminjaman-step-2', $data)
+            . view('Backend/Template/footer', $data);
     }
-
     public function simpan_temp_pinjam()
     {
         $modelPeminjaman = new M_Peminjaman();
-        $modelBuku       = new M_Buku();
+        $modelBuku = new M_Buku();
 
-        $uri    = service('uri');
-        $idBuku = $uri->getSegment(3); // Mengambil hash ID buku dari URL
+        // pastikan session anggota ada
+        $idAnggota = session()->get('idAgt');
 
-        // Ambil data buku berdasarkan hash SHA1 id_buku
-        $dataBuku = $modelBuku->getDataBuku(['sha1(id_buku)' => $idBuku])->getRowArray();
+        if (!$idAnggota) {
+            session()->setFlashdata('error', 'Session anggota hilang, silakan pilih anggota lagi.');
+            return redirect()->to(base_url('admin/peminjaman-step-1'));
+        }
 
-        // 1. Validasi: Cek apakah buku yang sama sudah ada di keranjang (temp)
-        $adaTemp = $modelPeminjaman->getDataTemp(['sha1(id_buku)' => $idBuku])->getNumRows();
+        $uri = service('uri');
+        $idBukuHash = $uri->getSegment(3);
 
-        // 2. Validasi: Cek apakah anggota masih memiliki pinjaman aktif (Berjalan)
-        $adaBerjalan = $modelPeminjaman->getDataPeminjaman([
-            'id_anggota'       => session()->get('idAgt'),
-            'status_transaksi' => "Berjalan"
+        // ambil data buku
+        $dataBuku = $modelBuku->getDataBuku([
+            'sha1(id_buku)' => $idBukuHash
+        ])->getRowArray();
+
+        if (!$dataBuku) {
+            session()->setFlashdata('error', 'Data buku tidak ditemukan.');
+            return redirect()->back();
+        }
+
+        // cek buku yg sama di keranjang anggota yg sama
+        $adaTemp = $modelPeminjaman->getDataTemp([
+            'sha1(id_buku)' => $idBukuHash,
+            'id_anggota' => $idAnggota
         ])->getNumRows();
 
         if ($adaTemp > 0) {
-            session()->setFlashdata('error', 'Satu Anggota Hanya Bisa Meminjam 1 Buku dengan Judul yang Sama!');
-            return redirect()->back();
-        } elseif ($adaBerjalan > 0) {
-            session()->setFlashdata('error', 'Masih ada transaksi peminjaman yang belum diselesaikan, silakan selesaikan peminjaman sebelumnya terlebih dahulu!');
-            return redirect()->back();
-        } else {
-            // 3. Proses Simpan ke Tabel Temporary
-            $dataSimpanTemp = [
-                'id_anggota'  => session()->get('idAgt'),
-                'id_buku'     => $dataBuku['id_buku'],
-                'jumlah_temp' => '1'
-            ];
-            $modelPeminjaman->saveDataTemp($dataSimpanTemp);
+            session()->setFlashdata(
+                'error',
+                'Buku ini sudah ada di keranjang peminjaman.'
+            );
 
-            // 4. Update Stok Buku (Kurangi 1)
-            $stok       = $dataBuku['jumlah_eksemplar'] - 1;
-            $dataUpdate = [
-                'jumlah_eksemplar' => $stok
-            ];
-            $modelBuku->updateDataBuku($dataUpdate, ['sha1(id_buku)' => $idBuku]);
-
-            // 5. Redirect kembali ke Step 2
-            session()->setFlashdata('success', 'Buku berhasil ditambahkan ke daftar pinjam.');
             return redirect()->to(base_url('admin/peminjaman-step-2'));
         }
+
+        // cek stok
+        if ((int) $dataBuku['jumlah_eksemplar'] <= 0) {
+            session()->setFlashdata('error', 'Stok buku habis.');
+            return redirect()->to(base_url('admin/peminjaman-step-2'));
+        }
+
+        // simpan temp
+        $dataSimpanTemp = [
+            'id_anggota' => $idAnggota,
+            'id_buku' => $dataBuku['id_buku'],
+            'jumlah_temp' => 1
+        ];
+
+        $modelPeminjaman->saveDataTemp($dataSimpanTemp);
+
+        // update stok
+        $stokBaru = (int) $dataBuku['jumlah_eksemplar'] - 1;
+
+        $modelBuku->updateDataBuku([
+            'jumlah_eksemplar' => $stokBaru
+        ], [
+            'id_buku' => $dataBuku['id_buku']
+        ]);
+
+        session()->setFlashdata('success', 'Buku berhasil ditambahkan.');
+
+        return redirect()->to(base_url('admin/peminjaman-step-2'));
     }
 
     public function hapus_peminjaman()
     {
         // Inisialisasi model yang diperlukan
         $modelPeminjaman = new M_Peminjaman();
-        $modelBuku       = new M_Buku();
+        $modelBuku = new M_Buku();
 
         // Mengambil ID Buku dari segment URI ke-3
-        $uri    = service('uri');
+        $uri = service('uri');
         $idBuku = $uri->getSegment(3);
 
         // Mengambil data buku berdasarkan hash SHA1 id_buku untuk mendapatkan stok saat ini
@@ -1172,7 +1205,7 @@ document.location = "<?= base_url('admin/master-data-buku');?>";
             // 1. Menghapus data dari tabel temporary berdasarkan ID Buku dan ID Anggota di session
             $whereHapus = [
                 'sha1(id_buku)' => $idBuku,
-                'id_anggota'    => session()->get('idAgt')
+                'id_anggota' => session()->get('idAgt')
             ];
             $modelPeminjaman->hapusDataTemp($whereHapus);
 
@@ -1208,7 +1241,7 @@ document.location = "<?= base_url('admin/master-data-buku');?>";
         ])->getNumRows();
 
         // --- PROSES GENERATE QR CODE ---
-        $dataQR  = $idPeminjaman;
+        $dataQR = $idPeminjaman;
         $labelQR = $idPeminjaman;
 
         $result = Builder::create()
@@ -1239,14 +1272,14 @@ document.location = "<?= base_url('admin/master-data-buku');?>";
         echo $result->getString();
         // 1. Menyiapkan data untuk tabel induk peminjaman
         $dataSimpan = [
-            'no_peminjaman'   => $idPeminjaman,
-            'id_anggota'      => session()->get('idAgt'),
-            'tgl_pinjam'      => date("Y-m-d"),
-            'total_pinjam'    => $jumlahPinjam,
-            'id_admin'        => '-', // Bisa diisi dengan ID admin yang login jika ada
+            'no_peminjaman' => $idPeminjaman,
+            'id_anggota' => session()->get('idAgt'),
+            'tgl_pinjam' => date("Y-m-d"),
+            'total_pinjam' => $jumlahPinjam,
+            'id_admin' => '-', // Bisa diisi dengan ID admin yang login jika ada
             'status_transaksi' => "Berjalan",
             'status_ambil_buku' => "Sudah Diambil",
-            'qr_code'        => $namaQR,
+            'qr_code' => $namaQR,
         ];
         $modelPeminjaman->saveDataPeminjaman($dataSimpan);
 
@@ -1256,10 +1289,10 @@ document.location = "<?= base_url('admin/master-data-buku');?>";
         foreach ($dataTemp as $sementara) {
             $simpanDetail = [
                 'no_peminjaman' => $idPeminjaman,
-                'id_buku'       => $sementara['id_buku'],
+                'id_buku' => $sementara['id_buku'],
                 'status_pinjam' => "Sedang Dipinjam",
-                'perpanjangan'  => "2",
-                'tgl_kembali'   => $kembali
+                'perpanjangan' => "2",
+                'tgl_kembali' => $kembali
             ];
             $modelPeminjaman->saveDataDetail($simpanDetail);
         }
@@ -1283,8 +1316,8 @@ document.location = "<?= base_url('admin/master-data-buku');?>";
         $dataPeminjaman = $modelPeminjaman->getDataPeminjamanJoin()->getResultArray();
 
         $data = [
-            'page'           => $uri->getSegment(2),
-            'web_title'      => "Data Transaksi Peminjaman",
+            'page' => $uri->getSegment(2),
+            'web_title' => "Data Transaksi Peminjaman",
             'dataPeminjaman' => $dataPeminjaman
         ];
 
@@ -1315,10 +1348,10 @@ document.location = "<?= base_url('admin/master-data-buku');?>";
             ->getResultArray();
 
         $data = [
-            'page'               => $uri->getSegment(2),
-            'web_title'          => 'Detail Peminjaman',
-            'dataPeminjaman'     => $dataPeminjaman,
-            'detailPeminjaman'   => $detailPeminjaman
+            'page' => $uri->getSegment(2),
+            'web_title' => 'Detail Peminjaman',
+            'dataPeminjaman' => $dataPeminjaman,
+            'detailPeminjaman' => $detailPeminjaman
         ];
 
         return view('Backend/Template/header', $data)
@@ -1356,8 +1389,8 @@ document.location = "<?= base_url('admin/master-data-buku');?>";
     public function proses_pengembalian($noPeminjaman, $idBuku)
     {
         $modelPengembalian = new M_Pengembalian();
-        $modelPeminjaman   = new M_Peminjaman();
-        $modelBuku         = new M_Buku();
+        $modelPeminjaman = new M_Peminjaman();
+        $modelBuku = new M_Buku();
 
         // AMBIL DATA BUKU
         $dataBuku = $modelBuku
@@ -1370,7 +1403,7 @@ document.location = "<?= base_url('admin/master-data-buku');?>";
         $detail = \db_connect()->table('tbl_detail_peminjaman')
             ->where([
                 'no_peminjaman' => $noPeminjaman,
-                'id_buku'       => $idBuku
+                'id_buku' => $idBuku
             ])
             ->get()
             ->getRowArray();
@@ -1397,11 +1430,11 @@ document.location = "<?= base_url('admin/master-data-buku');?>";
         // SIMPAN DATA PENGEMBALIAN
         $dataSimpan = [
             'no_pengembalian' => $noPengembalian,
-            'no_peminjaman'   => $noPeminjaman,
-            'id_buku'         => $idBuku,
-            'denda'           => $denda,
+            'no_peminjaman' => $noPeminjaman,
+            'id_buku' => $idBuku,
+            'denda' => $denda,
             'tgl_pengembalian' => date('Y-m-d'),
-            'id_admin'        => 'ADM001'
+            'id_admin' => 'ADM001'
         ];
 
         $modelPengembalian->saveDataPengembalian($dataSimpan);
@@ -1413,7 +1446,7 @@ document.location = "<?= base_url('admin/master-data-buku');?>";
             ],
             [
                 'no_peminjaman' => $noPeminjaman,
-                'id_buku'       => $idBuku
+                'id_buku' => $idBuku
             ]
         );
 
