@@ -40,10 +40,10 @@ class Admin extends BaseController
         session()->remove('ses_level');
         session()->setFlashdata('info', 'Anda Berhasil Logout!');
         ?>
-        <script>
-            document.location = "<?= base_url('admin/login-admin'); ?>";
-        </script>
-        <?php
+<script>
+document.location = "<?= base_url('admin/login-admin'); ?>";
+</script>
+<?php
     }
 
     public function dashboard()
@@ -55,10 +55,10 @@ class Admin extends BaseController
         ) {
             session()->setFlashdata('error', 'Silahkan Login Terlebih Dahulu!');
             ?>
-            <script>
-                document.location = "<?= base_url('admin/login-admin'); ?>";
-            </script>
-            <?php
+<script>
+document.location = "<?= base_url('admin/login-admin'); ?>";
+</script>
+<?php
             return;
         }
 
@@ -105,10 +105,10 @@ class Admin extends BaseController
         if ($cekUsername == 0) {
             session()->setFlashdata('error', 'Username Tidak Ditemukan');
             ?>
-            <script>
-                history.go(-1);
-            </script>
-            <?php
+<script>
+history.go(-1);
+</script>
+<?php
         } else {
 
             $dataUser = $modelAdmin
@@ -125,10 +125,10 @@ class Admin extends BaseController
             if (!$verifikasiPassword) {
                 session()->setFlashdata('error', 'Password Tidak Sesuai!');
                 ?>
-                <script>
-                    history.go(-1);
-                </script>
-                <?php
+<script>
+history.go(-1);
+</script>
+<?php
             } else {
 
                 $dataSession = [
@@ -140,10 +140,10 @@ class Admin extends BaseController
                 session()->set($dataSession);
                 session()->setFlashdata('success', 'Login Berhasil!');
                 ?>
-                <script>
-                    document.location = "<?= base_url('admin/dashboard-admin'); ?>";
-                </script>
-                <?php
+<script>
+document.location = "<?= base_url('admin/dashboard-admin'); ?>";
+</script>
+<?php
             }
         }
     }
@@ -159,10 +159,10 @@ class Admin extends BaseController
         ) {
             session()->setFlashdata('error', 'Silakan login terlebih dahulu!');
             ?>
-            <script>
-                document.location = "<?= base_url('admin/login-admin'); ?>";
-            </script>
-            <?php
+<script>
+document.location = "<?= base_url('admin/login-admin'); ?>";
+</script>
+<?php
         } else {
 
             echo view('Backend/Template/header');
@@ -181,10 +181,10 @@ class Admin extends BaseController
         ) {
             session()->setFlashdata('error', 'Silakan login terlebih dahulu!');
             ?>
-            <script>
-                document.location = "<?= base_url('admin/login-admin'); ?>";
-            </script>
-            <?php
+<script>
+document.location = "<?= base_url('admin/login-admin'); ?>";
+</script>
+<?php
         } else {
 
             $modelAdmin = new M_Admin();
@@ -200,10 +200,10 @@ class Admin extends BaseController
             if ($cekUname > 0) {
                 session()->setFlashdata('error', 'Username sudah digunakan!!');
                 ?>
-                <script>
-                    history.go(-1);
-                </script>
-                <?php
+<script>
+history.go(-1);
+</script>
+<?php
             } else {
 
                 $hasil = $modelAdmin->autoNumber()->getRowArray();
@@ -233,10 +233,10 @@ class Admin extends BaseController
 
                 session()->setFlashdata('success', 'Data Admin Berhasil Ditambahkan!!');
                 ?>
-                <script>
-                    document.location = "<?= base_url('admin/master-data-admin'); ?>";
-                </script>
-                <?php
+<script>
+document.location = "<?= base_url('admin/master-data-admin'); ?>";
+</script>
+<?php
             }
         }
     }
@@ -245,10 +245,10 @@ class Admin extends BaseController
         if (session()->get('ses_id') == "" or session()->get('ses_user') == "" or session()->get('ses_level') == "") {
             session()->setFlashdata('error', 'Silakan login terlebih dahulu!');
             ?>
-            <script>
-                document.location = "<?= base_url('admin/login-admin'); ?>";
-            </script>
-            <?php
+<script>
+document.location = "<?= base_url('admin/login-admin'); ?>";
+</script>
+<?php
         } else {
             $modelAdmin = new M_Admin(); // inisiasi
 
@@ -300,10 +300,10 @@ class Admin extends BaseController
         if ($nama == "" or $level == "") {
             session()->setFlashdata('error', 'Isian tidak boleh kosong!!');
             ?>
-            <script>
-                history.go(-1);
-            </script>
-            <?php
+<script>
+history.go(-1);
+</script>
+<?php
         } else {
             $dataUpdate = [
                 'nama_admin' => $nama,
@@ -316,10 +316,10 @@ class Admin extends BaseController
             session()->remove('idUpdate');
             session()->setFlashdata('success', 'Data Admin Berhasil Diperbaharui!');
             ?>
-            <script>
-                document.location = "<?= base_url('admin/master-data-admin'); ?>";
-            </script>
-            <?php
+<script>
+document.location = "<?= base_url('admin/master-data-admin'); ?>";
+</script>
+<?php
         }
     }
 
@@ -339,10 +339,10 @@ class Admin extends BaseController
         $modelAdmin->updateDataAdmin($dataUpdate, $whereUpdate);
         session()->setFlashdata('success', 'Data Admin Berhasil Dihapus!');
         ?>
-        <script>
-            document.location = "<?= base_url('admin/master-data-admin'); ?>";
-        </script>
-        <?php
+<script>
+document.location = "<?= base_url('admin/master-data-admin'); ?>";
+</script>
+<?php
     }
 
     // MASTER KATEGORI
@@ -351,10 +351,10 @@ class Admin extends BaseController
         if (session()->get('ses_id') == "" || session()->get('ses_user') == "" || session()->get('ses_level') == "") {
             session()->setFlashdata('error', 'Silakan login terlebih dahulu!');
             ?>
-            <script>
-                document.location = "<?= base_url('admin/login-admin'); ?>";
-            </script>
-            <?php
+<script>
+document.location = "<?= base_url('admin/login-admin'); ?>";
+</script>
+<?php
         } else {
             $modelKategori = new M_Kategori();
             $data['data_kategori'] = $modelKategori->getDataKategori()->getResultArray();
@@ -371,10 +371,10 @@ class Admin extends BaseController
         if (session()->get('ses_id') == "" || session()->get('ses_user') == "" || session()->get('ses_level') == "") {
             session()->setFlashdata('error', 'Silakan login terlebih dahulu!');
             ?>
-            <script>
-                document.location = "<?= base_url('admin/login-admin'); ?>";
-            </script>
-            <?php
+<script>
+document.location = "<?= base_url('admin/login-admin'); ?>";
+</script>
+<?php
         } else {
             echo view('Backend/Template/header');
             echo view('Backend/Template/sidebar');
@@ -388,10 +388,10 @@ class Admin extends BaseController
         if (session()->get('ses_id') == "" || session()->get('ses_user') == "" || session()->get('ses_level') == "") {
             session()->setFlashdata('error', 'Silakan login terlebih dahulu!');
             ?>
-            <script>
-                document.location = "<?= base_url('admin/login-admin'); ?>";
-            </script>
-            <?php
+<script>
+document.location = "<?= base_url('admin/login-admin'); ?>";
+</script>
+<?php
         } else {
             $modelKategori = new M_Kategori();
 
@@ -401,10 +401,10 @@ class Admin extends BaseController
             if ($cek > 0) {
                 session()->setFlashdata('error', 'Kategori sudah ada!');
                 ?>
-                <script>
-                    history.go(-1);
-                </script>
-                <?php
+<script>
+history.go(-1);
+</script>
+<?php
             } else {
                 $hasil = $modelKategori->autoNumber()->getRowArray();
 
@@ -429,10 +429,10 @@ class Admin extends BaseController
 
                 session()->setFlashdata('success', 'Data berhasil ditambahkan!');
                 ?>
-                <script>
-                    document.location = "<?= base_url('admin/master-data-kategori'); ?>";
-                </script>
-                <?php
+<script>
+document.location = "<?= base_url('admin/master-data-kategori'); ?>";
+</script>
+<?php
             }
         }
     }
@@ -442,10 +442,10 @@ class Admin extends BaseController
         if (session()->get('ses_id') == "" || session()->get('ses_user') == "" || session()->get('ses_level') == "") {
             session()->setFlashdata('error', 'Silakan login terlebih dahulu!');
             ?>
-            <script>
-                document.location = "<?= base_url('admin/login-admin'); ?>";
-            </script>
-            <?php
+<script>
+document.location = "<?= base_url('admin/login-admin'); ?>";
+</script>
+<?php
         } else {
             $modelKategori = new \App\Models\M_Kategori();
 
@@ -468,10 +468,10 @@ class Admin extends BaseController
         if (session()->get('ses_id') == "" || session()->get('ses_user') == "" || session()->get('ses_level') == "") {
             session()->setFlashdata('error', 'Silakan login terlebih dahulu!');
             ?>
-            <script>
-                document.location = "<?= base_url('admin/login-admin'); ?>";
-            </script>
-            <?php
+<script>
+document.location = "<?= base_url('admin/login-admin'); ?>";
+</script>
+<?php
         } else {
             $modelKategori = new \App\Models\M_Kategori();
 
@@ -489,10 +489,10 @@ class Admin extends BaseController
 
             session()->setFlashdata('success', 'Data berhasil diupdate!');
             ?>
-            <script>
-                document.location = "<?= base_url('admin/master-data-kategori'); ?>";
-            </script>
-            <?php
+<script>
+document.location = "<?= base_url('admin/master-data-kategori'); ?>";
+</script>
+<?php
         }
     }
 
@@ -514,10 +514,10 @@ class Admin extends BaseController
 
         session()->setFlashdata('success', 'Data berhasil dihapus!');
         ?>
-        <script>
-            document.location = "<?= base_url('admin/master-data-kategori'); ?>";
-        </script>
-        <?php
+<script>
+document.location = "<?= base_url('admin/master-data-kategori'); ?>";
+</script>
+<?php
     }
 
     // MASTER RAK
@@ -553,11 +553,11 @@ class Admin extends BaseController
 
         if ($cek > 0) {
             ?>
-            <script>
-                alert('Rak sudah ada');
-                history.go(-1);
-            </script>
-            <?php
+<script>
+alert('Rak sudah ada');
+history.go(-1);
+</script>
+<?php
         } else {
 
             $hasil = $model->autoNumber()->getRowArray();
@@ -582,10 +582,10 @@ class Admin extends BaseController
             $model->saveDataRak($data);
 
             ?>
-            <script>
-                document.location = "<?= base_url('admin/master-data-rak'); ?>"
-            </script>
-            <?php
+<script>
+document.location = "<?= base_url('admin/master-data-rak'); ?>"
+</script>
+<?php
         }
     }
 
@@ -625,10 +625,10 @@ class Admin extends BaseController
         session()->remove('idUpdate');
 
         ?>
-        <script>
-            document.location = "<?= base_url('admin/master-data-rak'); ?>"
-        </script>
-        <?php
+<script>
+document.location = "<?= base_url('admin/master-data-rak'); ?>"
+</script>
+<?php
     }
 
     public function hapus_data_rak()
@@ -644,10 +644,10 @@ class Admin extends BaseController
         ], ['sha1(id_rak)' => $id]);
 
         ?>
-        <script>
-            document.location = "<?= base_url('admin/master-data-rak'); ?>"
-        </script>
-        <?php
+<script>
+document.location = "<?= base_url('admin/master-data-rak'); ?>"
+</script>
+<?php
     }
 
     // MASTER ANGGOTA
@@ -656,10 +656,10 @@ class Admin extends BaseController
         if (session()->get('ses_id') == "" || session()->get('ses_user') == "") {
             session()->setFlashdata('error', 'Silahkan login!');
             ?>
-            <script>
-                document.location = "<?= base_url('admin/login-admin'); ?>";
-            </script>
-            <?php
+<script>
+document.location = "<?= base_url('admin/login-admin'); ?>";
+</script>
+<?php
         }
 
         $model = new \App\Models\M_Anggota();
@@ -719,10 +719,10 @@ class Admin extends BaseController
 
         session()->setFlashdata('success', 'Data berhasil ditambahkan!');
         ?>
-        <script>
-            document.location = "<?= base_url('admin/master-data-anggota'); ?>";
-        </script>
-        <?php
+<script>
+document.location = "<?= base_url('admin/master-data-anggota'); ?>";
+</script>
+<?php
     }
 
     public function edit_data_anggota()
@@ -768,10 +768,10 @@ class Admin extends BaseController
 
         session()->setFlashdata('success', 'Data berhasil diupdate!');
         ?>
-        <script>
-            document.location = "<?= base_url('admin/master-data-anggota'); ?>";
-        </script>
-        <?php
+<script>
+document.location = "<?= base_url('admin/master-data-anggota'); ?>";
+</script>
+<?php
     }
 
     public function hapus_data_anggota()
@@ -789,10 +789,10 @@ class Admin extends BaseController
 
         session()->setFlashdata('success', 'Data berhasil dihapus!');
         ?>
-        <script>
-            document.location = "<?= base_url('admin/master-data-anggota'); ?>";
-        </script>
-        <?php
+<script>
+document.location = "<?= base_url('admin/master-data-anggota'); ?>";
+</script>
+<?php
     }
 
 
@@ -913,10 +913,10 @@ class Admin extends BaseController
         $modelBuku->saveDataBuku($dataSimpan);
         session()->setFlashdata('success', 'Data Buku Berhasil Diperbaharui!');
         ?>
-        <script>
-            document.location = "<?= base_url('admin/master-data-buku'); ?>";
-        </script>
-        <?php
+<script>
+document.location = "<?= base_url('admin/master-data-buku'); ?>";
+</script>
+<?php
     }
 
     public function hapus_buku($id)
@@ -932,10 +932,10 @@ class Admin extends BaseController
 
         session()->setFlashdata('success', 'Data Buku Berhasil Dihapus!');
         ?>
-        <script>
-            document.location = "<?= base_url('admin/master-data-buku'); ?>";
-        </script>
-        <?php
+<script>
+document.location = "<?= base_url('admin/master-data-buku'); ?>";
+</script>
+<?php
     }
 
     public function edit_buku($id)
@@ -1015,10 +1015,10 @@ class Admin extends BaseController
 
         session()->setFlashdata('success', 'Data Buku Berhasil Diupdate!');
         ?>
-        <script>
-            document.location = "<?= base_url('admin/master-data-buku'); ?>";
-        </script>
-        <?php
+<script>
+document.location = "<?= base_url('admin/master-data-buku'); ?>";
+</script>
+<?php
     }
 
     // Akhir Modul Buku
@@ -1026,14 +1026,18 @@ class Admin extends BaseController
     // MODUL PEMINJAMAN
     public function peminjaman_step1()
     {
+        $modelAnggota = new M_Anggota();
+
         $uri = service('uri');
 
         $data = [
             'page' => $uri->getSegment(2),
-            'web_title' => "Transaksi Peminjaman"
+            'web_title' => "Transaksi Peminjaman",
+            'anggota' => $modelAnggota->getDataAnggota([
+                'is_delete_anggota' => '0'
+            ])->getResultArray()
         ];
 
-        // Menggabungkan view dalam satu return untuk efisiensi
         return view('Backend/Template/header', $data)
             . view('Backend/Template/sidebar', $data)
             . view('Backend/Transaksi/peminjaman-step-1', $data)

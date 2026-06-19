@@ -1,5 +1,5 @@
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
-    
+
     <!-- Breadcrumb Section -->
     <div class="row">
         <ol class="breadcrumb">
@@ -28,14 +28,19 @@
                     <form action="<?= base_url('admin/peminjaman-step-2'); ?>" method="post">
 
                         <div class="form-group col-md-6">
-                            <label for="id_anggota">ID Anggota</label>
+                            <label for="id_anggota">Pilih Anggota</label>
 
-                            <input type="text"
-                                   name="id_anggota"
-                                   id="id_anggota"
-                                   class="form-control"
-                                   placeholder="Masukkan ID Anggota"
-                                   required="required">
+                            <select name="id_anggota" id="id_anggota" class="form-control" required>
+
+                                <option value="">-- Pilih Anggota --</option>
+
+                                <?php foreach ($anggota as $row) : ?>
+                                <option value="<?= $row['id_anggota']; ?>">
+                                    <?= $row['id_anggota']; ?> - <?= $row['nama_anggota']; ?>
+                                </option>
+                                <?php endforeach; ?>
+
+                            </select>
                         </div>
 
                         <div style="clear:both;"></div>
@@ -46,11 +51,8 @@
                                 Next
                             </button>
 
-                            <a href="<?= base_url('admin/peminjaman-step-1'); ?>"
-                               class="btn btn-danger">
-
+                            <a href="<?= base_url('admin/peminjaman-step-1'); ?>" class="btn btn-danger">
                                 Batal
-
                             </a>
 
                         </div>
@@ -68,18 +70,15 @@
 
 </div>
 
-
 <?php if(session()->getFlashdata('error')){ ?>
 
 <script type="text/javascript">
-
-    swal({
-        title: "Data Tidak Ditemukan!",
-        text: "ID Anggota yang anda masukkan tidak tersedia.",
-        icon: "error",
-        button: "OK",
-    });
-
+swal({
+    title: "Data Tidak Ditemukan!",
+    text: "ID Anggota yang anda masukkan tidak tersedia.",
+    icon: "error",
+    button: "OK",
+});
 </script>
 
 <?php } ?>
